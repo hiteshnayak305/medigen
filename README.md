@@ -6,6 +6,7 @@ Table of Contents
 -----------------
 
 - [Features](#features)
+- [Flow Chart](#flowchart)
 - [Prerequisites](#prerequisites)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -23,6 +24,9 @@ Features
   - Add available medicine list
   - Change/Reset Password
   - Delete account
+
+Flow Chart
+----------
 
 ![Flow chart](https://i.imgur.com/JGEm0Iq.jpg)
 
