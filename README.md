@@ -6,7 +6,7 @@ Table of Contents
 -----------------
 
 - [Features](#features)
-- [Flow Chart](#flowchart)
+- [Flow Chart](#flow-chart)
 - [Prerequisites](#prerequisites)
 - [Dependencies](#dependencies)
 - [License](#license)
