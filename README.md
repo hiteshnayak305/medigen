@@ -24,8 +24,10 @@ Features
   - Change/Reset Password
   - Delete account
 
+![Flow chart](https://imgur.com/a/yg3Fv)
+
 Prerequisites
-------------- 
+-------------
 
 Dependencies
 ------------
