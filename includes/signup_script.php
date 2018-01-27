@@ -18,12 +18,13 @@
   }
   $enc_password = md5($password);
   $contact = mysqli_real_escape_string($connection,$_POST['contact']);
-  $pattern = "^[0-9]{10}$";
+  $pattern = "^[0-9]{10}$^";
   if (!preg_match($pattern, $contact, $arr)) {
     header("Location: http://localhost/medigen/store_signup.php?err=no_format_contact");
   }
-  $city = mysqli_real_escape_string($connection,$_POST['city']);
   $address = mysqli_real_escape_string($connection,$_POST['address']);
+  $longitude = mysqli_real_escape_string($connection,$_POST['longitude']);
+  $latitude = mysqli_real_escape_string($connection,$_POST['latitude']);
 
   //check for duplicate email
   $query = "SELECT id FROM users WHERE email = '$email'";
@@ -33,7 +34,7 @@
     header("Location: http://localhost/medigen/store_signup.php?err=already_exist");
   } else {
     //create query
-    $query = "INSERT INTO users (name, email, password, contact, city, address) VALUES ('$name','$email','$enc_password','$contact','$city','$address')";
+    $query = "INSERT INTO users (name, username, password, contact, address,longitude, latitude) VALUES ('$name','$email','$enc_password','$contact','$address','$longitude','$latitude')";
     //execute query
     $query_status = mysqli_query($connection,$query) or die('unable to insert!!!');
     //login user set session

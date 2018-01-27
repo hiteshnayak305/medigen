@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('./config.php');
 require_once('./vendor/autoload.php');
 if (isset($_SESSION['email'])) {
@@ -9,7 +10,6 @@ if(mysqli_connect_errno()){
     echo 'Database connection failed with following errors: '. mysqli_connect_error();
     die();
 }
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,11 +52,15 @@ session_start();
               <input type="text" class="form-control" name="contact" pattern="^[0-9]{10}$" placeholder="Contact" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="city" placeholder="City">
-            </div>
-            <div class="form-group">
               <input type="text" class="form-control" name="address" placeholder="Address">
             </div>
+            <div class="form-group">
+              <input type="hidden" value="1" class="form-control" id="longitude" name="longitude">
+            </div>
+            <div class="form-group">
+              <input type="hidden" value="1" class="form-control" id="latitude" name="latitude">
+            </div>
+
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
         </div>
