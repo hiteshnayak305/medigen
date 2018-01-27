@@ -38,7 +38,7 @@ if(mysqli_connect_errno()){
       <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 form_container">
           <h2>SIGN UP</h2>
-          <form  action="includes/signup_script.php" method="post">
+          <form id="form" action="includes/signup_script.php" method="post">
             <div class="form-group">
               <input type="text" class="form-control" name="name" placeholder="Name" required>
             </div>
@@ -99,6 +99,9 @@ if(mysqli_connect_errno()){
                     lat.value=latitude;
                 }
             });
+    </script>
+    <script>
+        document.getElementById('picker').style.width=window.getComputedStyle(document.getElementById('form')).getPropertyValue('width');
     </script>
 </body>
 </html>
