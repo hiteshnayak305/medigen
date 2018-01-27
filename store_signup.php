@@ -55,12 +55,12 @@ if(mysqli_connect_errno()){
               <input type="text" class="form-control" name="address" placeholder="Address">
             </div>
             <div class="form-group">
-              <input type="hidden" value="1" class="form-control" id="longitude" name="longitude">
+              <input type="hidden" value="0" class="form-control" id="longitude" name="longitude">
             </div>
             <div class="form-group">
-              <input type="hidden" value="1" class="form-control" id="latitude" name="latitude">
+              <input type="hidden" value="0" class="form-control" id="latitude" name="latitude">
             </div>
-
+            <div id="picker" style="width: 500px; height: 400px;"></div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
         </div>
@@ -75,5 +75,29 @@ if(mysqli_connect_errno()){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+    <script src="js/locationpicker.jquery.js"></script>
+    <script>
+        var latitude = 25.4952002;
+        var longitude = 81.8684578;
+        $('#picker').locationpicker({
+                location: {
+                    latitude: 25.4952002,
+                    longitude: 81.8684578
+                },
+                radius: 300,
+                enableAutocomplete: true,
+                onchanged: function (currentLocation, radius, isMarkerDropped) {
+                    latitude = currentLocation.latitude;
+                    longitude = currentLocation.longitude;
+                    console.log(latitude);
+                    console.log(longitude);
+                    var long = document.querySelector('#longitude');
+                    var lat = document.querySelector('#latitude');
+                    long.value=longitude;
+                    lat.value=latitude;
+                }
+            });
+    </script>
 </body>
 </html>
