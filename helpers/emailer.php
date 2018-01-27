@@ -9,7 +9,7 @@
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 
-require $base_url.'/vendor/autoload.php';
+require './vendor/autoload.php';
 
     //Create a new PHPMailer instance
     $mail = new PHPMailer;
