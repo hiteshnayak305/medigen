@@ -61,6 +61,7 @@ if(mysqli_connect_errno()){
               <input type="hidden" value="0" class="form-control" id="latitude" name="latitude">
             </div>
             <div id="picker" style="width: 500px; height: 400px;"></div>
+            <br>
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
         </div>
