@@ -1,21 +1,22 @@
 <?php
+  session_start();
   //establise connection
-  require_once('./config.php');
-  require_once('./vendor/autoload.php');
+  require_once('../config.php');
+  require_once('../vendor/autoload.php');
   $connection = mysqli_connect($database_url,$database_user,$database_password,$database_name,$database_port);
   if(mysqli_connect_errno()){
       echo 'Database connection failed with following errors: '. mysqli_connect_error();
       die();
   }
-  session_start();
+
   //fetch values from from
   $name = mysqli_escape_string($connection,$_POST['name']);
   $email = mysqli_real_escape_string($connection,$_POST['email']);
   $password = mysqli_real_escape_string($connection,$_POST['password']);
   $pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$";
   if (!preg_match($pattern, $password, $arr)) {
-    header("Location: http://localhost/medigen/store_signup.php?err=no_format_pass");
-  }
+     header("Location: http://localhost/medigen/store_signup.php?err=no_format_pass");
+   }
   $enc_password = md5($password);
   $contact = mysqli_real_escape_string($connection,$_POST['contact']);
   $pattern = "^[0-9]{10}$^";
@@ -27,7 +28,7 @@
   $latitude = mysqli_real_escape_string($connection,$_POST['latitude']);
 
   //check for duplicate email
-  $query = "SELECT id FROM users WHERE email = '$email'";
+  $query = "SELECT id FROM users WHERE username = '$email'";
   $duplicates = mysqli_query($connection,$query) or die('unable to check!!!');
   $dup = mysqli_num_rows($duplicates);
   if ($dup > 1) {

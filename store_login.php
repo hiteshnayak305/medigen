@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('./config.php');
 require_once('./vendor/autoload.php');
 if (isset($_SESSION['email'])) {
@@ -9,7 +10,6 @@ if(mysqli_connect_errno()){
     echo 'Database connection failed with following errors: '. mysqli_connect_error();
     die();
 }
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HOME | SEARCH</title>
+    <title>Login | MEDIGEN</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
