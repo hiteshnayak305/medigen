@@ -1,12 +1,15 @@
 <?php
+session_start();
 require_once('./config.php');
 require_once('./vendor/autoload.php');
+if (!isset($_SESSION['email'])) {
+    header("Location: http://localhost/medigen/store_login.php");
+ }
 $database = mysqli_connect($database_url,$database_user,$database_password,$database_name,$database_port);
 if(mysqli_connect_errno()){
     echo 'Database connection failed with following errors: '. mysqli_connect_error();
     die();
 }
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,24 +19,46 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DASHBOARD | HOME</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
+
 <body>
+    <div class="row no-gutters">
+        <div class="col" id="navi">
+            <nav class="navbar navbar-dark bg-dark flex-md-nowrap">
+                <a class="navbar-brand col-md-2" href="#">
+                    <b>MediGen</b>
+                </a>
+                <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+                <button type="button" class="btn btn-dark">Search</button>
+                <!--<button type="button" class="btn btn-dark">Login</button>-->
+            </nav>
+        </div>
+        <div class="col-md-auto">
+            <div class="btn-group bg-dark flex-md-nowrap" id="drop">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hi <?php echo $_SESSION['name'];?>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <h6 class="dropdown-header">You are signed as User</h6>
+                    <div class="dropdown-divider"></div>
+                    <a href="http://localhost/medigen/settings.php" class="dropdown-item" type="button">Account Settings</a>
+                    <a href="http://localhost/medigen/includes/logout_script.php" class="dropdown-item" type="button">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <script>
+    document.getElementById('drop').style.height= window.getComputedStyle(document.getElementById('navi')).getPropertyValue('height');
+    </script>
 </body>
 </html>

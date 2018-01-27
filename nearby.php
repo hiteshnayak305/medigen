@@ -14,7 +14,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HOME | SEARCH</title>
+    <title>NEARBY | SEARCH</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -63,7 +63,7 @@ session_start();
                         </div>
                     </div>
                     <div class="col-md" style="display:flex;align-items:center;justify-content:flex-end;">
-                        <button class="btn" type="button">Get Location</button>
+                        <a href='http://localhost/medigen/store_location.php?lat=<?php echo $lat?>&long=<?php echo $long?>' class="btn" type="button" >Get Location</a>
                     </div>
                 </div>
             </div>
