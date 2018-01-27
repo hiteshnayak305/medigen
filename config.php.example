@@ -1,0 +1,18 @@
+//remove example extension
+<?php
+
+//environment
+$base_url="http://localhost";
+
+//email
+$port="25";
+$server="smtp.gmail.com";
+$sender_email="";
+$sender_mail_password="";
+
+//database
+$database_url="http://localhost:3306/medigen";
+$database_user="root";
+$database_password="toor";
+
+ ?>
