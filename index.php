@@ -29,8 +29,32 @@ session_start();
 </head>
 <body>
 
+        <div class="frmSearch">
+	       <input type="text" id="txtCountry" placeholder="Country Name" />
+	          <div id="suggesstion-box"></div>
+          </div>
 
 
+
+          <script>
+    $(document).ready(function () {
+        $('#txtCountry').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "includes/server.php",
+					data: 'query=' + query,
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+						result($.map(data, function (item) {
+							return item;
+                        }));
+                    }
+                });
+            }
+        });
+    });
+</script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

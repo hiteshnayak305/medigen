@@ -26,39 +26,38 @@ session_start();
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-     #map {
-       width: 100%;
-       height: 400px;
-       background-color: grey;
-     }
-   </style>
 </head>
 <body>
 
-    <div id="map"></div>
-
-        <script>
-          function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-            });
-            var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
-            });
-          }
-        </script>
+        <div class="frmSearch">
+	       <input type="text" id="txtCountry" placeholder="Country Name" />
+	          <div id="suggesstion-box"></div>
+          </div>
 
 
+
+          <script>
+    $(document).ready(function () {
+        $('#txtCountry').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "server.php",
+					data: 'query=' + query,
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+						result($.map(data, function (item) {
+							return item;
+                        }));
+                    }
+                });
+            }
+        });
+    });
+</script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6o9IzBYQdUaYAteeCCmK2pI1gLGwFKTU&callback=initMap">
-    </script>
 </body>
 </html>

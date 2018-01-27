@@ -1,6 +1,9 @@
 <?php
 require_once('./config.php');
 require_once('./vendor/autoload.php');
+if (isset($_SESSION['email'])) {
+    header("Location: http://localhost/medigen/dashboard.php");
+  }
 $database = mysqli_connect($database_url,$database_user,$database_password,$database_name,$database_port);
 if(mysqli_connect_errno()){
     echo 'Database connection failed with following errors: '. mysqli_connect_error();
@@ -26,39 +29,47 @@ session_start();
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-     #map {
-       width: 100%;
-       height: 400px;
-       background-color: grey;
-     }
-   </style>
 </head>
 <body>
 
-    <div id="map"></div>
+    <!--       main body      -->
+<main>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 form_container">
+          <h2>SIGN UP</h2>
+          <form  action="includes/signup_script.php" method="post">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group <?php if($_GET['err'] == "already_exist"){echo "has-warning";}?>">
+              <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="contact" pattern="^[0-9]{10}$" placeholder="Contact" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="city" placeholder="City">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="address" placeholder="Address">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+        </div>
+      </div>
+  </div>
+</main>
 
-        <script>
-          function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-            });
-            var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
-            });
-          }
-        </script>
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6o9IzBYQdUaYAteeCCmK2pI1gLGwFKTU&callback=initMap">
-    </script>
 </body>
 </html>
