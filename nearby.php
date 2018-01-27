@@ -16,32 +16,58 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HOME | SEARCH</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style>
-     #map {
-       width: 100%;
-       height: 400px;
-       background-color: grey;
-     }
-   </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
 </head>
+
 <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap">
+        <a class="navbar-brand col-md-2" href="#">
+            <b>MediGen</b>
+        </a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <button type="button" class="btn btn-dark">Search</button>
+        <button type="button" class="btn btn-dark">Login</button>
+    </nav>
+<?php    //user existence query
+    $query = "SELECT id,username,name FROM users WHERE username='$email'";
+    $result = mysqli_query($connection,$query) or die('email query unsuccessful!!!');
+    $num_rows = mysqli_num_rows($result);
+
+    //check existence
+    if ($num_rows < 1) {
+      header("Location: http://localhost/medigen/index.php");
+    } else {
+      //check for password
+      $res_arr = mysqli_fetch_array($result);
+?>
 
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <div class="row no-gutters" style="padding:5px">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <div class="card container" >
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <strong class="d-inline-block mb-2 text-primary">Arpit Choudhary</strong>
+                            <h3 class="mb-0"></h3>
+                            <div class="mb-1 text">Phone: 555-555-5555</div>
+                            <div class="mb-1 text">Email: sample@company.com</div>
+                            <div class="mb-1 text">Address: NITRR, NIT Raipur</div>
+                        </div>
+                    </div>
+                    <div class="col-md" style="display:flex;align-items:center;justify-content:flex-end;">
+                        <button class="btn" type="button">Get Location</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
