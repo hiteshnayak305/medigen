@@ -2,7 +2,7 @@
 session_start();
 require_once('./config.php');
 require_once('./vendor/autoload.php');
-$database = mysqli_connect($database_url,$database_user,$database_password,$database_name,$database_port);
+$connection = mysqli_connect($database_url,$database_user,$database_password,$database_name,$database_port);
 if(mysqli_connect_errno()){
     echo 'Database connection failed with following errors: '. mysqli_connect_error();
     die();
@@ -30,22 +30,29 @@ if(mysqli_connect_errno()){
     <div class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item"><a class="nav-link active" href="#">Analgesic</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Antibiotic</a></li>
+                <?php
+                //user existence query
+                    $query = "SELECT id,name,description FROM categories";
+                    $result = mysqli_query($connection,$query) or die('email query unsuccessful!!!');
+                    $num_rows = mysqli_num_rows($result);
+                    //check existence
+                    if ($num_rows < 1) {
+                        echo "no data";
+                      //header("Location: http://localhost/medigen/index.php");
+                    } else {
+                      //check for password
+                      $res_arr = mysqli_fetch_array($result);
+                      foreach ($res_arr as $key => $value) { ?>
+                        <li class="nav-item"><a class="nav-link active" href="#"><?php echo $value['name']; ?></a></li>
+                    <?php
+                      }
+                  }
+                ?>
             </ul>
         </div>
         <div class="col-md-8">
 
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $('input#search_bar').typeahead({
-                name: 'name',
-                remote: 'search.php?query=%QUERY'
-            });
-        })
-    </script>
 </body>
 </html>
